@@ -1,5 +1,5 @@
 const formSearch = document.querySelector('.form-search');
-const inputCitiesFrom = document.querySelector('.input__citites-from');
+const inputCitiesFrom = document.querySelector('.input__cities-from');
 const dropdownCitiesFrom = document.querySelector('.dropdown__cities-from');
 const inputCitiesTo = document.querySelector('.input__cities-to');
 const dropdownCitiesTo = document.querySelector('.dropdown__cities-to');
@@ -8,7 +8,8 @@ const cheapestTicket = document.getElementById('cheapest-ticket');
 const otherCheapTicket = document.getElementById('other-cheap-tickets');
 
 //Данные
-const CITI_API = 'database/cities.json',
+const CITI_API = './database/cities.json',
+        //CITI_API = 'http://api.travelpayouts.com/data/ru/cities.json',
         PROXY = 'https://cors-anywhere.herokuapp.com/',
         //API_KEY = ,
         calendar = 'http://min-prices.aviasales.ru/calendar_preload',
@@ -25,7 +26,7 @@ const getData = (url, callback, reject = console.error) => {
                 if(request.status === 200) {
                         callback(request.response);
                 } else {
-                        reject(request.status);
+                        //reject(request.status);
                 }
         });
 
@@ -222,7 +223,8 @@ formSearch.addEventListener('submit', (event) => {
 });
 
 //Вызовы функций 
-getData(citiesApi, (data) => {
+//getData(PROXY + CITI_API, (data) => {
+getData(CITI_API, (data) => {
         city = JSON.parse(data).filter((item) => item.name);
 
         city.sort((a, b) => {
